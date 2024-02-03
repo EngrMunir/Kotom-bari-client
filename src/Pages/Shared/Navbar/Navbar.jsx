@@ -1,10 +1,10 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const navlinks = <>
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/">Dashboard</Link></li>
+        <li><Link to="/menu">Our Menu</Link></li>
+        <li><Link to="/order">Order Food</Link></li>
     </>
     return (
         <div className="navbar fixed z-10 bg-opacity-30 max-w-screen-xl mx-auto bg-black text-white">
