@@ -4,8 +4,11 @@ import { Helmet } from "react-helmet";
 import { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import SocialLogin from '../../Component/SocialLogin/SocialLogin';
 
 const SignUp = () => {
+    const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, reset, formState: { errors },} = useForm();
     const { createUser, updateUserProfile }= useContext(AuthContext);
     const navigate = useNavigate();
@@ -18,16 +21,27 @@ const SignUp = () => {
             console.log(loggedUser);
             updateUserProfile(data.name, data.photoURL)
             .then(()=>{
-                console.log('user profile info updated')
-                reset();
-                Swal.fire({
-                    position: 'top-end',
-                    icon:'success',
-                    title:'Your profile has been updated',
-                    showConfirmationButton: false,
-                    timer:1500
-                });
-                navigate('/')
+            //    create user entry in the database
+            const userInfo ={
+                name: data.name,
+                email: data.email
+            }
+            axiosPublic.post('/users', userInfo)
+            .then(res =>{
+                if(res.data.insertedId){
+                    console.log('user added to the database');
+                    reset();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon:'success',
+                        title:'Your profile has been updated',
+                        showConfirmationButton: false,
+                        timer:1500
+                    });
+                    navigate('/')
+                }
+            })
+               
             })
             .catch(error=>console.error(error))
          })
@@ -90,7 +104,8 @@ const SignUp = () => {
                         <button className="btn btn-primary">Register</button>
                     </div>
                 </form>
-                <p className='text-center mb-4'><small>Already registered? <Link to="/login">Login</Link></small></p>
+                <p className='text-center mb-4 px-6'><small>Already registered? <Link to="/login">Login</Link></small></p>
+                <SocialLogin></SocialLogin>
             </div>
         </div>
     </div>

@@ -24,7 +24,7 @@ const Cart = () => {
             //  
             axiosSecure.delete(`/carts/${id}`)
             .then(res =>{
-                if(res.data.deletedCount >0 ){
+                if(res.data.deletedCount >0){
                   refetch();
                     Swal.fire({
                              title: "Deleted!",
