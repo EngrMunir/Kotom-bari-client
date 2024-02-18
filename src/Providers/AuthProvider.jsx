@@ -27,6 +27,7 @@ const AuthProvider = ({children}) => {
     }
     const logOut = ()=>{
         setLoading(true);
+        console.log('Logout function is called')
         return signOut(auth);
     }
 

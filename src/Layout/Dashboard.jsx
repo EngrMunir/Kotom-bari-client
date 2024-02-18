@@ -9,6 +9,7 @@ const Dashboard = () => {
     // TODO: get isAdmin value from the database
     // const isAdmin = true;
     const [isAdmin] = useAdmin();
+    // console.log('isAdmin value', isAdmin);
     return (
         <div className="flex">
             {/* dashboard side bar */}

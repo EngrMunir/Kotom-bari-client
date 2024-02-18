@@ -18,7 +18,7 @@ const SocialLogin = () => {
             }
             axiosPublic.post('/users', userInfo)
             .then(res =>{
-                console.log(res.data);
+                console.log('res data google login ',res.data);
                 navigate('/');
             })
         })
