@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import SectionTitle from "../../../Component/SectionTitle/SectionTitle";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -97,7 +97,7 @@ const UpdateItem = () => {
                         <textarea defaultValue={recipe}  {...register('recipe')} className="textarea textarea-bordered h-24" placeholder="Recipe details"></textarea>
                     </div>
                     <div className="form-control w-full my-6">
-                        <input defaultValue={image} {...register('image', {required:true})} required type="file" className="file-input file-input-bordered max-w-xs" />
+                        <input {...register('image', {required:true})} required type="file" className="file-input file-input-bordered max-w-xs" />
                     </div>
                     <button className="btn">
                         Update Menu Item 
